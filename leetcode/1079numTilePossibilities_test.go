@@ -26,12 +26,10 @@ func dfs(i int, count map[string]int) int {
 	}
 	//fmt.Println(i, ",", count)
 	res := 1
-	c := 0
 	for t := range count {
-		c++
 		if count[t] > 0 {
 			count[t]--
-			fmt.Println(t, "before", count, ",", c)
+			fmt.Println(t, "before", count)
 			res = res + dfs(i-1, count)
 			count[t]++
 			fmt.Println(t, "after:", count)
