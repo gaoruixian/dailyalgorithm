@@ -13,6 +13,29 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
+func sufficientSubset2(root *TreeNode, limit int) *TreeNode {
+	if root == nil {
+		return nil
+	}
+	limit = limit - root.Val
+	// 叶子节点
+	if root.Left == root.Right {
+		if limit > 0 {
+			return nil
+		}
+		return root
+	}
+	// 左子节点
+	root.Left = sufficientSubset2(root.Left, limit)
+	// 右子节点
+	root.Right = sufficientSubset2(root.Right, limit)
+	// 左右子节点都为空，删除该节点
+	if root.Left == nil && root.Right == nil {
+		return nil
+	}
+	return root
+}
+
 func sufficientSubset(root *TreeNode, limit int) *TreeNode {
 	if root == nil {
 		return nil
